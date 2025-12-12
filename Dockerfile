@@ -1,0 +1,31 @@
+# Mobile Web App Dockerfile
+FROM node:20-alpine
+
+# Install necessary packages for Next.js
+RUN apk add --no-cache libc6-compat
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Expose port
+EXPOSE 3002
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3002
+ENV HOSTNAME="0.0.0.0"
+
+# Start the application
+CMD ["npm", "start"]
