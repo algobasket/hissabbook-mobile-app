@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HissabBook</string>
+    <string name="title_activity_main">HissabBook</string>
+    <string name="package_name">com.hissabbook.mobile</string>
+    <string name="custom_url_scheme">com.hissabbook.mobile</string>
+</resources>

@@ -3,12 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { getAuthToken, isAdmin } from "../utils/auth";
+import { getApiBaseUrl } from "../utils/config";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
-  (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "/backend");
+const API_BASE = getApiBaseUrl();
 
 interface Business {
   id: string;
@@ -239,9 +236,9 @@ export default function BusinessSelector() {
       {/* Header Button - Shows current business */}
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="flex w-full items-center gap-2 rounded-lg border border-[#10B981] bg-white px-3 py-2.5 text-sm font-medium text-[#1f2937] transition hover:border-[#10B981] hover:bg-slate-50"
+        className="flex w-full items-center gap-1.5 sm:gap-2 rounded-lg border border-[#10B981] bg-white px-2 sm:px-3 py-1.5 sm:py-2.5 text-xs sm:text-sm font-medium text-[#1f2937] transition hover:border-[#10B981] hover:bg-slate-50"
       >
-        <svg className="h-4 w-4 text-[#10B981]" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24">
+        <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#10B981] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
         <span className="flex-1 truncate text-left font-medium text-[#1f2937]">

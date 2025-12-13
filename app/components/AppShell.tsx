@@ -5,12 +5,10 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
 import type { ReactNode } from "react";
 import { getUser, clearAuth, getUserRole } from "../utils/auth";
+import { getApiBaseUrl } from "../utils/config";
 import BusinessSelector from "./BusinessSelector";
 
-const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || 
-  (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "/backend");
+const API_BASE = getApiBaseUrl();
 
 type NavItem = {
   label: string;
@@ -454,11 +452,11 @@ export default function AppShell({ activePath, children }: AppShellProps) {
       <div className="flex flex-1 flex-col">
         <header className="border-b border-purple-300 bg-gradient-to-r from-purple-200/80 to-purple-50/40 px-4 sm:px-8 py-3 sm:py-4 shadow-sm">
           {/* Mobile Layout: Stacked */}
-          <div className="lg:hidden space-y-3">
+          <div className="lg:hidden space-y-2">
             {/* Top Row: Welcome Text + Actions */}
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
-                <h1 className="text-sm font-semibold text-[#111827] leading-tight">
+                <h1 className="text-xs sm:text-sm font-semibold text-[#111827] leading-tight">
                   Welcome {formatRoleName(userRole)}
                 </h1>
               </div>
@@ -990,8 +988,8 @@ export default function AppShell({ activePath, children }: AppShellProps) {
           </div>
         </header>
 
-        <main className="flex-1 bg-[#f7f9ff] px-4 sm:px-8 py-6 sm:py-10">
-          <div className="mx-auto w-full">{children}</div>
+        <main className="flex-1 bg-[#f7f9ff] px-2 sm:px-4 md:px-8 py-4 sm:py-6 md:py-10 overflow-x-hidden">
+          <div className="mx-auto w-full max-w-full">{children}</div>
         </main>
       </div>
     </div>

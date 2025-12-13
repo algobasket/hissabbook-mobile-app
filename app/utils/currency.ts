@@ -1,10 +1,7 @@
 // Utility functions for currency handling
+import { getApiBaseUrl } from "./config";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
-  (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "/backend");
+const API_BASE = getApiBaseUrl();
 
 let cachedCurrency: string | null = null;
 let currencyPromise: Promise<string> | null = null;

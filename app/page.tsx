@@ -4,11 +4,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { getApiBaseUrl } from "./utils/config";
 
-const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || 
-  (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "/backend");
+const API_BASE = getApiBaseUrl();
 
 const slides = [
   {

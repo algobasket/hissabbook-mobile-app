@@ -5,13 +5,10 @@ import { useRouter, useParams } from "next/navigation";
 import AppShell from "../../components/AppShell";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { getAuthToken, getUserRole, isAdmin, fetchUserPermissions } from "../../utils/auth";
+import { getApiBaseUrl } from "../../utils/config";
 import jsPDF from "jspdf";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
-  (typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://localhost:5000"
-    : "/backend");
+const API_BASE = getApiBaseUrl();
 
 interface Book {
   id: string;
@@ -1320,23 +1317,23 @@ export default function BookDetailPage() {
   return (
     <ProtectedRoute>
       <AppShell activePath="/cashbooks">
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-slate-50 overflow-x-hidden">
           {/* Header */}
           <div className="border-b border-slate-200 bg-white">
-            <div className="w-full px-2 py-4 sm:px-3 lg:px-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+            <div className="w-full max-w-full px-2 py-3 sm:px-3 lg:px-4">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
                   <button
                     onClick={() => router.push("/cashbooks")}
-                    className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+                    className="rounded-lg p-1.5 sm:p-2 text-slate-600 hover:bg-slate-100 flex-shrink-0"
                   >
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
-                  <h1 className="text-xl font-semibold text-[#1f2937]">{book.name}</h1>
+                  <h1 className="text-base sm:text-xl font-semibold text-[#1f2937] truncate">{book.name}</h1>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
                   <button
                     onClick={() => router.push(`/cashbooks/${bookId}/settings/members`)}
                     className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
@@ -1356,19 +1353,19 @@ export default function BookDetailPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </button>
-                  {/* Add Bulk Entries - Only show for managers/admins */}
+                  {/* Add Bulk Entries - Only show for managers/admins - Hidden on mobile */}
                   {(getUserRole() === "managers" || getUserRole() === "manager" || isAdmin()) && (
-                    <button className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                    <button className="hidden sm:flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50">
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
-                      Add Bulk Entries
+                      <span className="hidden md:inline">Add Bulk Entries</span>
                     </button>
                   )}
                   <div className="relative">
                     <button 
                       onClick={() => setShowReportsDropdown(!showReportsDropdown)}
-                      className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                      className="flex items-center gap-1 sm:gap-2 rounded-lg border border-slate-200 bg-white px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50"
                     >
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -1410,9 +1407,9 @@ export default function BookDetailPage() {
 
           {/* Filters and Search */}
           <div className="border-b border-slate-200 bg-white">
-            <div className="w-full px-2 py-4 sm:px-3 lg:px-4">
+            <div className="w-full max-w-full px-2 py-4 sm:px-3 lg:px-4">
               {/* Filter Dropdowns */}
-              <div className="mb-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+              <div className="mb-4 grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-3 lg:grid-cols-6">
                 {/* Duration Dropdown */}
                 <div className="relative">
                   <button
@@ -1731,7 +1728,7 @@ export default function BookDetailPage() {
                     </svg>
                   </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3 w-full max-w-full sm:w-auto">
                   {/* Show buttons only if user is manager/admin OR if staff and toggle is enabled */}
                   {(() => {
                     const userRole = getUserRole();
@@ -1750,24 +1747,24 @@ export default function BookDetailPage() {
                             setEntryType("cash_in");
                             setShowCashEntryModal(true);
                           }}
-                          className="flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition"
+                          className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg bg-emerald-600 px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition min-w-0"
                         >
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
-                          Cash In
+                          <span className="truncate">Cash In</span>
                         </button>
                         <button
                           onClick={() => {
                             setEntryType("cash_out");
                             setShowCashEntryModal(true);
                           }}
-                          className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 transition"
+                          className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg bg-rose-600 px-3 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-rose-700 transition min-w-0"
                         >
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
                           </svg>
-                          Cash Out
+                          <span className="truncate">Cash Out</span>
                         </button>
                       </>
                     );
@@ -1778,19 +1775,19 @@ export default function BookDetailPage() {
           </div>
 
           {/* Summary Cards */}
-          <div className="w-full px-2 sm:px-3 lg:px-4">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="w-full max-w-full px-2 sm:px-3 lg:px-4 py-4">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
               {/* Cash In Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
-                    <svg className="h-6 w-6 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-emerald-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Cash In</p>
-                    <p className="text-2xl font-bold text-green-600">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Cash In</p>
+                    <p className="text-lg sm:text-2xl font-bold text-green-600 truncate">
                       {entries
                         .filter((e) => e.entry_type === "cash_in")
                         .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
@@ -1804,16 +1801,16 @@ export default function BookDetailPage() {
               </div>
 
               {/* Cash Out Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
-                    <svg className="h-6 w-6 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-red-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Cash Out</p>
-                    <p className="text-2xl font-bold text-red-600">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Cash Out</p>
+                    <p className="text-lg sm:text-2xl font-bold text-red-600 truncate">
                       {entries
                         .filter((e) => e.entry_type === "cash_out")
                         .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
@@ -1827,15 +1824,15 @@ export default function BookDetailPage() {
               </div>
 
               {/* Net Balance Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                    <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-blue-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Net Balance</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Net Balance</p>
                     {(() => {
                       const netBalance = (
                         entries
@@ -1846,7 +1843,7 @@ export default function BookDetailPage() {
                           .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
                       );
                       return (
-                        <p className={`text-2xl font-bold ${
+                        <p className={`text-lg sm:text-2xl font-bold truncate ${
                           netBalance >= 0 ? "text-green-600" : "text-red-600"
                         }`}>
                           {netBalance.toLocaleString("en-IN", {
@@ -1863,7 +1860,7 @@ export default function BookDetailPage() {
           </div>
 
           {/* Main Content */}
-          <div className="w-full px-2 py-8 sm:px-3 lg:px-4">
+          <div className="w-full max-w-full px-2 py-8 sm:px-3 lg:px-4 overflow-x-hidden">
             {loadingEntries ? (
               <div className="flex min-h-[400px] items-center justify-center rounded-xl border border-slate-200 bg-white p-12">
                 <div className="text-center">
@@ -1901,12 +1898,12 @@ export default function BookDetailPage() {
                   const endEntry = endIndex;
                   
                   return totalPages > 0 ? (
-                    <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 sm:px-6">
-                      <div className="flex flex-1 justify-between sm:hidden">
+                    <div className="flex items-center justify-between border-b border-slate-200 bg-white px-2 sm:px-4 md:px-6 py-3 w-full max-w-full overflow-x-hidden">
+                      <div className="flex flex-1 justify-between gap-2 sm:hidden w-full">
                         <button
                           onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                           disabled={currentPage === 1}
-                          className={`relative inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium ${
+                          className={`flex-1 inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm font-medium min-w-0 ${
                             currentPage === 1
                               ? "text-slate-300 cursor-not-allowed"
                               : "text-slate-700 hover:bg-slate-50"
@@ -1917,7 +1914,7 @@ export default function BookDetailPage() {
                         <button
                           onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                           disabled={currentPage === totalPages}
-                          className={`relative ml-3 inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium ${
+                          className={`flex-1 inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-3 py-2 text-xs sm:text-sm font-medium min-w-0 ${
                             currentPage === totalPages
                               ? "text-slate-300 cursor-not-allowed"
                               : "text-slate-700 hover:bg-slate-50"
@@ -1998,11 +1995,122 @@ export default function BookDetailPage() {
                     </div>
                   ) : null;
                 })()}
-                <div className="overflow-x-auto">
+                {/* Mobile Card View */}
+                <div className="block md:hidden space-y-3 w-full max-w-full">
+                  {(() => {
+                    const totalEntries = entries.length;
+                    const startIndex = (currentPage - 1) * entriesPerPage;
+                    const endIndex = startIndex + entriesPerPage;
+                    const paginatedEntries = entries.slice(startIndex, endIndex);
+
+                    return paginatedEntries.map((entry: any) => {
+                      const entryDate = new Date(entry.entry_date);
+                      const day = entryDate.getDate();
+                      const month = entryDate.toLocaleDateString("en-GB", { month: "short" });
+                      const year = entryDate.getFullYear();
+                      const formattedDate = `${day} ${month}, ${year}`;
+                      let formattedTime = "";
+                      if (entry.entry_time) {
+                        const timeStr = entry.entry_time.substring(0, 5);
+                        const [hours, minutes] = timeStr.split(':');
+                        const hour24 = parseInt(hours);
+                        const hour12 = hour24 === 0 ? 12 : hour24 > 12 ? hour24 - 12 : hour24;
+                        const ampm = hour24 >= 12 ? 'PM' : 'AM';
+                        formattedTime = `${hour12.toString().padStart(2, '0')}:${minutes} ${ampm}`;
+                      }
+
+                      let attributionLabel = "by";
+                      let attributionValue: string | null = null;
+                      if (entry.created_by_first_name || entry.created_by_last_name) {
+                        attributionValue = `${entry.created_by_first_name || ""} ${entry.created_by_last_name || ""}`.trim();
+                      } else if (entry.created_by_email) {
+                        const emailName = entry.created_by_email.split("@")[0] || "";
+                        if (emailName.startsWith("phone_") && book?.name) {
+                          attributionLabel = "for";
+                          attributionValue = book.name;
+                        } else {
+                          attributionValue = emailName || "Unknown";
+                        }
+                      } else if (book?.name) {
+                        attributionLabel = "for";
+                        attributionValue = book.name;
+                      }
+
+                      return (
+                        <div
+                          key={entry.id}
+                          onClick={() => {
+                            fetchEntryWithAttachments(entry.id).then((entryWithAttachments) => {
+                              setSelectedEntry(entryWithAttachments || entry);
+                            }).catch((err) => {
+                              console.error("Error loading entry details:", err);
+                              setSelectedEntry(entry);
+                            });
+                          }}
+                          className="w-full max-w-full rounded-lg border border-slate-200 bg-white p-3 shadow-sm active:bg-slate-50 overflow-hidden"
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-2 w-full">
+                            <div className="flex-1 min-w-0 pr-2 overflow-hidden">
+                              <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                                <span className={`inline-flex rounded-full px-1.5 py-0.5 text-[10px] font-semibold flex-shrink-0 ${
+                                  entry.entry_type === "cash_in"
+                                    ? "bg-emerald-100 text-emerald-800"
+                                    : "bg-red-100 text-red-800"
+                                }`}>
+                                  {entry.entry_type === "cash_in" ? "Cash In" : "Cash Out"}
+                                </span>
+                                <span className="text-xs font-semibold text-slate-900 truncate">{formattedDate}</span>
+                              </div>
+                              {formattedTime && <div className="text-[10px] text-slate-500">{formattedTime}</div>}
+                            </div>
+                            <div className={`text-right text-xs sm:text-sm font-bold flex-shrink-0 whitespace-nowrap ${
+                              entry.entry_type === "cash_in" ? "text-emerald-600" : "text-red-600"
+                            }`}>
+                              {entry.entry_type === "cash_in" ? "+" : "-"}
+                              {parseFloat(entry.amount).toLocaleString("en-IN", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}
+                            </div>
+                          </div>
+                          {entry.remarks && (
+                            <div className="mb-2 min-w-0 w-full">
+                              <div className="text-xs font-medium text-slate-700 break-words overflow-wrap-anywhere">{entry.remarks}</div>
+                              {attributionValue && (
+                                <div className="text-[10px] text-slate-400 mt-0.5 truncate">
+                                  {attributionLabel} {attributionValue}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          <div className="flex flex-wrap gap-x-2 gap-y-1 text-[10px] text-slate-500 w-full">
+                            {entry.party_name && !entry.party_name.startsWith("phone_") && (
+                              <span className="truncate">Party: {entry.party_name}</span>
+                            )}
+                            {entry.category_name && <span className="truncate">Category: {entry.category_name}</span>}
+                            {entry.payment_mode && <span className="truncate">Mode: {entry.payment_mode}</span>}
+                          </div>
+                          <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between gap-2 w-full">
+                            <span className="text-[10px] text-slate-500 flex-shrink-0">Balance:</span>
+                            <span className={`text-xs font-semibold whitespace-nowrap ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                              {(entry.balance || 0).toLocaleString("en-IN", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+
+                {/* Desktop Table View */}
+                <div className="hidden md:block overflow-x-auto">
                   <table className="min-w-full divide-y divide-slate-200">
                     <thead className="bg-slate-50">
                       <tr>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                           <input
                             type="checkbox"
                             checked={(() => {
@@ -2034,15 +2142,15 @@ export default function BookDetailPage() {
                             className="h-4 w-4 rounded border-slate-300 text-[#10B981] focus:ring-2 focus:ring-[#10B981] focus:ring-offset-2"
                           />
                         </th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Date & Time</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Remarks</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Type</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Party</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Category</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Payment Mode</th>
-                        <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Amount</th>
-                        <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Balance</th>
-                        <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">Actions</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Date & Time</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Remarks</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Type</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Party</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Category</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Payment Mode</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Amount</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Balance</th>
+                        <th className="px-2 sm:px-4 py-2 sm:py-3 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 bg-white">
@@ -2104,7 +2212,7 @@ export default function BookDetailPage() {
                               });
                             }}
                           >
-                            <td className="whitespace-nowrap px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                            <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3" onClick={(e) => e.stopPropagation()}>
                               <input
                                 type="checkbox"
                                 checked={selectedEntries.has(entry.id)}
@@ -2121,11 +2229,11 @@ export default function BookDetailPage() {
                                 className="h-4 w-4 rounded border-slate-300 text-[#10B981] focus:ring-2 focus:ring-[#10B981] focus:ring-offset-2"
                               />
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                            <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-600">
                               <div className="font-semibold text-slate-900">{formattedDate}</div>
                               {formattedTime && <div className="text-xs text-slate-500">{formattedTime}</div>}
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">
+                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-600">
                               <div className="max-w-xs truncate" title={entry.remarks || ""}>
                                 {entry.remarks || "-"}
                               </div>
@@ -2135,9 +2243,9 @@ export default function BookDetailPage() {
                                 </div>
                               )}
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3">
+                            <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3">
                               <span
-                                className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                                className={`inline-flex rounded-full px-2 py-0.5 text-[10px] sm:text-xs font-semibold ${
                                   entry.entry_type === "cash_in"
                                     ? "bg-emerald-100 text-emerald-800"
                                     : "bg-red-100 text-red-800"
@@ -2146,15 +2254,15 @@ export default function BookDetailPage() {
                                 {entry.entry_type === "cash_in" ? "Cash In" : "Cash Out"}
                               </span>
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">
+                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-600">
                               {entry.party_name && entry.party_name.startsWith("phone_") 
                                 ? "via phone" 
                                 : (entry.party_name || "-")}
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">{entry.category_name || "-"}</td>
-                            <td className="px-4 py-3 text-sm text-slate-600">{entry.payment_mode || "-"}</td>
+                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-600">{entry.category_name || "-"}</td>
+                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-slate-600">{entry.payment_mode || "-"}</td>
                             <td
-                              className={`whitespace-nowrap px-4 py-3 text-right text-sm font-semibold ${
+                              className={`whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-right text-xs sm:text-sm font-semibold ${
                                 entry.entry_type === "cash_in" ? "text-emerald-600" : "text-red-600"
                               }`}
                             >
@@ -2164,13 +2272,13 @@ export default function BookDetailPage() {
                                 maximumFractionDigits: 2,
                               })}
                             </td>
-                            <td className={`whitespace-nowrap px-4 py-3 text-right text-sm font-semibold ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                            <td className={`whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-right text-xs sm:text-sm font-semibold ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>
                               {(entry.balance || 0).toLocaleString("en-IN", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               })}
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3 text-center" onClick={(e) => e.stopPropagation()}>
+                            <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-center" onClick={(e) => e.stopPropagation()}>
                               {userPermissions.includes("cashbooks.delete") && (
                                 <button
                                   onClick={async (e) => {
