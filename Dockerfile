@@ -16,14 +16,16 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Set production environment for build
+ENV NODE_ENV=production
+
+# Build the application (for web deployment, not static export)
 RUN npm run build
 
 # Expose port
 EXPOSE 3002
 
 # Set environment variables
-ENV NODE_ENV=production
 ENV PORT=3002
 ENV HOSTNAME="0.0.0.0"
 
