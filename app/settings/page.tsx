@@ -79,7 +79,7 @@ export default function SettingsPage() {
     const role = getUserRole();
     if (isStaff() || role === "staff") {
       // Staff users should not access settings page
-      router.push("/dashboard");
+      router.push("/mobile/dashboard");
       return;
     }
     setCheckingAccess(false);

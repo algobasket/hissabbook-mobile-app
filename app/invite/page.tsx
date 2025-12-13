@@ -536,7 +536,7 @@ function InvitePageContent() {
       
       // Redirect based on role - staff should go to cashbooks, managers to dashboard
       const userRole = data.user?.role || data.user?.roles?.[0];
-      const redirectPath = userRole === "staff" ? "/cashbooks" : "/dashboard";
+      const redirectPath = userRole === "staff" ? "/mobile/cashbooks" : "/mobile/dashboard";
       
       setTimeout(() => {
         // Force a hard refresh to ensure books are fetched

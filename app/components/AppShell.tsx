@@ -92,7 +92,7 @@ const allNavSections: NavSection[] = [
   {
     title: "HissabBook UPI",
     items: [
-      { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
+      { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
       { label: "Request Payout", href: "/request-payout", icon: "payout" },
       { label: "Wallets", href: "/wallets", icon: "wallet" },
       { label: "Approvals", href: "/approvals", icon: "approvals" },
@@ -113,7 +113,7 @@ const managerNavSections: NavSection[] = [
   {
     title: "Overview",
     items: [
-      { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
+      { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
       { label: "Businesses List", href: "/businesses", icon: "business" },
     ],
   },
@@ -180,7 +180,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
         {
           title: "HissabBook UPI",
           items: [
-            { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
+            { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
             { label: "Request Payout", href: "/request-payout", icon: "payout" },
             { label: "Wallets", href: "/wallets", icon: "wallet" },
             { label: "Approvals", href: "/approvals", icon: "approvals" },

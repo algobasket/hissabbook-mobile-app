@@ -2,8 +2,9 @@
 import MembersPageClient from "./page-client";
 
 export async function generateStaticParams() {
-  // Return empty array - routes will be handled via client-side routing
-  return [];
+  // Return placeholder for static export validation
+  // Actual routes will be handled via client-side routing
+  return [{ id: '__placeholder__' }];
 }
 
 export default function MembersPageWrapper() {

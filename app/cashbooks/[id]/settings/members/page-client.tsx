@@ -1588,3 +1588,4 @@ function formatPermissionName(permission: string): string {
   // Return as-is if already readable
   return permission;
 }
+

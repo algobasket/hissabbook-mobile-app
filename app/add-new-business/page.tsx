@@ -76,7 +76,7 @@ export default function AddNewBusinessPage() {
 
       setSuccess(true);
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/mobile/dashboard");
       }, 1500);
     } catch (err) {
       console.error("Error creating business:", err);

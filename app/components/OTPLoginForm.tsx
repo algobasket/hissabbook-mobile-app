@@ -199,9 +199,9 @@ export default function OTPLoginForm({ onSwitchToEmail, onLoginSuccess }: OTPLog
         }
 
         setStatus("Login successful! Redirecting to dashboard...");
-        // Redirect to dashboard
+        // Redirect to mobile dashboard
         setTimeout(() => {
-          window.location.href = "/dashboard";
+          window.location.href = "/mobile/dashboard";
         }, 1000);
       } else {
         throw new Error("Invalid response from server");
