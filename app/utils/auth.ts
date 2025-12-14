@@ -43,7 +43,19 @@ export function isAuthenticated(): boolean {
 
 export function getUserRole(): string | null {
   const user = getUser();
-  return user?.role || user?.roles?.[0] || null;
+  if (!user) {
+    return null;
+  }
+  
+  // Try role first, then roles array
+  const role = user?.role || user?.roles?.[0] || null;
+  
+  // Debug logging (can be removed in production if needed)
+  if (process.env.NODE_ENV === 'development') {
+    console.log("getUserRole:", { role, userRole: user.role, userRoles: user.roles });
+  }
+  
+  return role;
 }
 
 export function hasRole(role: string): boolean {

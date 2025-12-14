@@ -7,7 +7,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 export default function DashboardPage() {
   return (
     <ProtectedRoute>
-      <AppShell activePath="/mobile/dashboard">
+      <AppShell activePath="/dashboard">
         <DashboardContent />
       </AppShell>
     </ProtectedRoute>

@@ -92,7 +92,7 @@ const allNavSections: NavSection[] = [
   {
     title: "HissabBook UPI",
     items: [
-      { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
+      { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
       { label: "Request Payout", href: "/request-payout", icon: "payout" },
       { label: "Wallets", href: "/wallets", icon: "wallet" },
       { label: "Approvals", href: "/approvals", icon: "approvals" },
@@ -113,7 +113,7 @@ const managerNavSections: NavSection[] = [
   {
     title: "Overview",
     items: [
-      { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
+      { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
       { label: "Businesses List", href: "/businesses", icon: "business" },
     ],
   },
@@ -168,9 +168,36 @@ export default function AppShell({ activePath, children }: AppShellProps) {
   >([]);
   const [unreadCount, setUnreadCount] = useState(0);
 
+  // Helper function to check if user is a manager (case-insensitive, handles variations)
+  const isManagerRole = (role: string | null): boolean => {
+    if (!role) {
+      return false;
+    }
+    const normalizedRole = role.toLowerCase().trim();
+    const isManager = normalizedRole === "managers" || normalizedRole === "manager";
+    
+    // Debug logging (can be removed in production if needed)
+    if (process.env.NODE_ENV === 'development') {
+      console.log("AppShell - isManagerRole:", { role, normalizedRole, isManager });
+    }
+    
+    return isManager;
+  };
+
+  const formatRoleName = (role: string | null): string => {
+    if (!role) return "User";
+    // Handle common role names
+    if (isManagerRole(role)) return "Manager";
+    // Capitalize first letter and replace underscores with spaces
+    return role
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
+
   // Get user role and filter navigation based on role
   const navSections = useMemo(() => {
-    if (userRole === "managers" || userRole === "manager") {
+    if (isManagerRole(userRole)) {
       return managerNavSections;
     }
     
@@ -180,7 +207,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
         {
           title: "HissabBook UPI",
           items: [
-            { label: "Dashboard", href: "/mobile/dashboard", icon: "dashboard" },
+            { label: "Dashboard", href: "/dashboard", icon: "dashboard" },
             { label: "Request Payout", href: "/request-payout", icon: "payout" },
             { label: "Wallets", href: "/wallets", icon: "wallet" },
             { label: "Approvals", href: "/approvals", icon: "approvals" },
@@ -253,7 +280,13 @@ export default function AppShell({ activePath, children }: AppShellProps) {
   useEffect(() => {
     const user = getUser();
     const role = getUserRole();
-    console.log("AppShell - User role:", role, "User:", user);
+    
+    // Debug logging (can be removed in production if needed)
+    if (process.env.NODE_ENV === 'development') {
+      console.log("AppShell - User role:", role, "User:", user);
+      console.log("AppShell - Is Manager Role:", isManagerRole(role));
+    }
+    
     setUserRole(role);
     
     if (user) {
@@ -348,17 +381,6 @@ export default function AppShell({ activePath, children }: AppShellProps) {
   useEffect(() => {
     setIsMobileSidebarOpen(false);
   }, [activePath]);
-
-  const formatRoleName = (role: string | null): string => {
-    if (!role) return "User";
-    // Handle common role names
-    if (role === "managers" || role === "manager") return "Manager";
-    // Capitalize first letter and replace underscores with spaces
-    return role
-      .split("_")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
-  };
 
   const handleLogout = () => {
     clearAuth();
@@ -659,7 +681,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
                           </span>
                           <span>Account Info</span>
                         </Link>
-                        {(userRole === "managers" || userRole === "manager") && (
+                        {isManagerRole(userRole) && (
                           <Link
                             href="/settings"
                             onClick={() => setIsDropdownOpen(false)}
@@ -731,7 +753,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
             </div>
             
             {/* Business Selector - Mobile View (only for managers) */}
-            {(userRole === "managers" || userRole === "manager") && (
+            {isManagerRole(userRole) && (
               <div className="w-full">
                 <BusinessSelector />
               </div>
@@ -746,7 +768,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
               </h1>
             </div>
             <div className="flex items-center justify-center flex-1">
-              {(userRole === "managers" || userRole === "manager") && <BusinessSelector />}
+              {isManagerRole(userRole) && <BusinessSelector />}
             </div>
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -938,7 +960,7 @@ export default function AppShell({ activePath, children }: AppShellProps) {
                         </span>
                         <span>Account Info</span>
                       </Link>
-                      {(userRole === "managers" || userRole === "manager") && (
+                      {isManagerRole(userRole) && (
                         <Link
                           href="/settings"
                           onClick={() => setIsDropdownOpen(false)}
