@@ -84,11 +84,16 @@ export default function BusinessSelector() {
       const token = getAuthToken();
       if (!token) {
         console.error("No auth token found");
+        setBusinesses([]);
+        setError(null);
+        setLoading(false);
         return;
       }
 
       const url = `${API_BASE}/api/businesses`;
       console.log("Fetching businesses from:", url);
+      console.log("API_BASE:", API_BASE);
+      console.log("Token exists:", !!token);
 
       const response = await fetch(url, {
         method: "GET",
