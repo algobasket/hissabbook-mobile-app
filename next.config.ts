@@ -13,9 +13,10 @@ const nextConfig: NextConfig = {
   
   basePath: basePathValue,
   
-  // Disable image optimization for static export, enable for server mode
+  // Disable image optimization for static export and production (to avoid basePath issues)
+  // Enable only for development if needed
   images: {
-    unoptimized: isStaticExport,
+    unoptimized: isStaticExport || process.env.NODE_ENV === 'production',
   },
   
   // Trailing slash for static export
