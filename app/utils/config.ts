@@ -4,8 +4,8 @@
 
 /**
  * Get the API base URL based on the environment
- * - Development: Uses localhost:5000 (backend API)
- * - Production: Uses https://hissabbook.com (backend API)
+ * - Development: Uses localhost:5000 (backend API directly)
+ * - Production: Uses https://hissabbook.com/backend (backend API via nginx proxy)
  */
 export function getApiBaseUrl(): string {
   // Check if we're in a Capacitor app (native mobile app)
@@ -22,18 +22,18 @@ export function getApiBaseUrl(): string {
     return process.env.NEXT_PUBLIC_BACKEND_URL.replace(/\/$/, "");
   }
 
-  // In Capacitor app (native), use production API
+  // In Capacitor app (native), use production API via /backend proxy
   if (isCapacitor) {
-    return "https://hissabbook.com";
+    return "https://hissabbook.com/backend";
   }
 
-  // In development (web browser), use localhost
+  // In development (web browser), use localhost directly
   if (isDevelopment) {
     return "http://localhost:5000";
   }
 
-  // Default to production
-  return "https://hissabbook.com";
+  // Default to production via /backend proxy
+  return "https://hissabbook.com/backend";
 }
 
 /**

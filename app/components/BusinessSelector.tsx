@@ -112,23 +112,29 @@ export default function BusinessSelector() {
           errorData = { message: errorText || `HTTP ${response.status}: ${response.statusText}` };
         }
         
-        // Log error but don't throw - let component handle gracefully
-        console.warn("Failed to fetch businesses:", {
+        // Log error with full details for debugging
+        console.error("Failed to fetch businesses:", {
           status: response.status,
           statusText: response.statusText,
           error: errorData,
           url: url,
+          apiBase: API_BASE,
+          hasToken: !!token,
         });
         
-        // If unauthorized, the token might not be valid for backend
-        // This is expected if API system and backend use different JWT secrets
+        // If unauthorized or forbidden, log more details
         if (response.status === 401 || response.status === 403) {
-          console.warn("Authentication failed - backend may use different JWT secret than API system");
+          console.error("Authentication/Authorization failed:", {
+            status: response.status,
+            message: errorData.message,
+            url: url,
+          });
         }
         
-        // Return empty array instead of throwing
+        // Set error state so user knows something went wrong
+        setError(errorData.message || `Failed to fetch businesses (${response.status})`);
         setBusinesses([]);
-        setError(null);
+        setLoading(false);
         return;
       }
 
@@ -136,15 +142,21 @@ export default function BusinessSelector() {
       setBusinesses(data.businesses || []);
       setError(null);
     } catch (err) {
-      // Only log network errors, not HTTP errors (already handled above)
+      // Log all errors for debugging
+      console.error("Error fetching businesses:", {
+        error: err,
+        message: err instanceof Error ? err.message : String(err),
+        url: `${API_BASE}/api/businesses`,
+        apiBase: API_BASE,
+      });
+      
+      // Set error message for network/CORS errors
       if (err instanceof TypeError && err.message.includes('fetch')) {
-        console.warn("Network error fetching businesses:", err);
+        setError("Network error: Unable to connect to server. Please check your connection.");
       } else {
-        console.warn("Error fetching businesses:", err);
+        setError(err instanceof Error ? err.message : "Failed to fetch businesses");
       }
       setBusinesses([]);
-      setError(null);
-      // Don't show error to user - component will just not render if no businesses
     } finally {
       setLoading(false);
     }
