@@ -5034,9 +5034,10 @@ export default function BookDetailPageClient() {
                     
                     try {
                       // For R2 URLs (public) or local URLs, fetch the file and download it
-                      const headers = isR2Url 
+                      const token = getAuthToken();
+                      const headers: Record<string, string> = isR2Url 
                         ? {} // R2 URLs are public, no auth needed
-                        : { Authorization: `Bearer ${getAuthToken()}` }; // Local URLs need auth
+                        : token ? { Authorization: `Bearer ${token}` } : {}; // Local URLs need auth
                       
                       const response = await fetch(attachmentUrl, { headers });
                       
