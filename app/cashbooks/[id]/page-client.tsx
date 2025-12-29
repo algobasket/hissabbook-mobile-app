@@ -4009,34 +4009,26 @@ export default function BookDetailPageClient() {
                         const fileType = attachment.mime_type || attachment.file_type || attachment.type || '';
                         const attachmentId = attachment.id;
                         
-                        // Construct URL - handle both absolute URLs and relative paths
-                        let attachmentUrl = attachment.url;
-                        if (!attachmentUrl && filePath) {
-                          // If path starts with /, it's already a full path
-                          if (filePath.startsWith('/')) {
+                        // Construct URL - handle R2 URLs and local paths
+                        // Priority: Check if it's already a full URL (R2 or external)
+                        let attachmentUrl = attachment.url || filePath;
+                        
+                        if (attachmentUrl) {
+                          // If it's already a full URL (R2 or external), use it directly
+                          if (attachmentUrl.startsWith('http://') || attachmentUrl.startsWith('https://')) {
+                            // Already a full URL (R2 URL), use as-is
+                            // No modification needed
+                          } else if (attachmentUrl.startsWith('/')) {
+                            // Relative path starting with /, construct local URL
                             // Remove any existing /backend/ prefix to avoid duplication
-                            let cleanPath = filePath;
+                            let cleanPath = attachmentUrl;
                             if (cleanPath.startsWith('/backend/')) {
                               cleanPath = cleanPath.replace(/^\/backend/, '');
                             }
                             attachmentUrl = `${API_BASE}${cleanPath}`;
-                          } else if (filePath.startsWith('http')) {
-                            attachmentUrl = filePath;
                           } else {
-                            attachmentUrl = `${API_BASE}/${filePath}`;
-                          }
-                        } else if (attachmentUrl && attachmentUrl.startsWith('/')) {
-                          // Remove any existing /backend/ prefix to avoid duplication
-                          let cleanUrl = attachmentUrl;
-                          if (cleanUrl.startsWith('/backend/')) {
-                            cleanUrl = cleanUrl.replace(/^\/backend/, '');
-                          }
-                          // If URL is relative (starts with /), prepend API_BASE
-                          attachmentUrl = `${API_BASE}${cleanUrl}`;
-                        } else if (attachmentUrl && !attachmentUrl.startsWith('http')) {
-                          // Handle case where URL might already have /backend/ prefix
-                          if (attachmentUrl.startsWith('/backend/')) {
-                            attachmentUrl = attachmentUrl; // Already correct
+                            // Relative path without leading slash, construct local URL
+                            attachmentUrl = `${API_BASE}/${attachmentUrl}`;
                           }
                         }
                         
@@ -4946,23 +4938,18 @@ export default function BookDetailPageClient() {
 
               {/* Content */}
               <div className="p-6">
-                {/* Filename */}
-                <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-700">
-                    {previewAttachment.file_name || previewAttachment.name || 'Attachment'}
-                  </p>
-                </div>
 
                 {/* Image/File Preview */}
                 <div className="flex items-center justify-center bg-slate-50 rounded-lg min-h-[400px] max-h-[70vh] overflow-auto">
                   {(() => {
-                    // Construct full URL - handle relative paths
+                    // Construct full URL - handle R2 URLs and local paths
                     let attachmentUrl = previewAttachment.url || previewAttachment.path || previewAttachment.file_path;
                     if (attachmentUrl) {
-                      // If URL already starts with http/https, use it as-is
+                      // If URL already starts with http/https (R2 URL), use it as-is
                       if (attachmentUrl.startsWith('http://') || attachmentUrl.startsWith('https://')) {
-                        // Already a full URL, use as-is
+                        // Already a full URL (R2 URL), use as-is - no modification needed
                       } else if (attachmentUrl.startsWith('/')) {
+                        // Relative path starting with /, construct local URL
                         // Normalize API_BASE (remove trailing slash)
                         const apiBaseNormalized = API_BASE.replace(/\/$/, '');
                         
@@ -4980,8 +4967,8 @@ export default function BookDetailPageClient() {
                           // Prepend API_BASE
                           attachmentUrl = `${apiBaseNormalized}${cleanUrl}`;
                         }
-                      } else if (!attachmentUrl.startsWith('http')) {
-                        // Relative path without leading slash
+                      } else {
+                        // Relative path without leading slash, construct local URL
                         attachmentUrl = `${API_BASE}/${attachmentUrl}`;
                       }
                     }
@@ -5026,44 +5013,55 @@ export default function BookDetailPageClient() {
                   Close
                 </button>
                 <button
-                  onClick={() => {
-                    // Construct full URL - handle relative paths
+                  onClick={async () => {
+                    // Construct full URL - handle R2 URLs and local paths
                     let attachmentUrl = previewAttachment.url || previewAttachment.path || previewAttachment.file_path;
                     if (attachmentUrl) {
-                      if (attachmentUrl.startsWith('/')) {
+                      // If it's already a full URL (R2 URL), use it directly
+                      if (attachmentUrl.startsWith('http://') || attachmentUrl.startsWith('https://')) {
+                        // Already a full URL (R2 URL), use as-is
+                      } else if (attachmentUrl.startsWith('/')) {
+                        // Relative path starting with /, construct local URL
                         attachmentUrl = `${API_BASE}${attachmentUrl}`;
-                      } else if (!attachmentUrl.startsWith('http')) {
+                      } else {
+                        // Relative path without leading slash, construct local URL
                         attachmentUrl = `${API_BASE}/${attachmentUrl}`;
                       }
                     }
+                    
                     const fileName = previewAttachment.file_name || previewAttachment.name || 'attachment';
+                    const isR2Url = attachmentUrl && (attachmentUrl.startsWith('http://') || attachmentUrl.startsWith('https://'));
                     
-                    // Create a temporary anchor element to trigger download
-                    const link = document.createElement('a');
-                    link.href = attachmentUrl;
-                    link.download = fileName;
-                    link.target = '_blank';
-                    
-                    // Add authorization header if needed (for protected files)
-                    // For now, we'll use a simple approach
-                    fetch(attachmentUrl, {
-                      headers: {
-                        Authorization: `Bearer ${getAuthToken()}`,
-                      },
-                    })
-                      .then(response => response.blob())
-                      .then(blob => {
-                        const url = window.URL.createObjectURL(blob);
-                        link.href = url;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        window.URL.revokeObjectURL(url);
-                      })
-                      .catch(() => {
-                        // Fallback: open in new tab if download fails
-                        window.open(attachmentUrl, '_blank');
-                      });
+                    try {
+                      // For R2 URLs (public) or local URLs, fetch the file and download it
+                      const headers = isR2Url 
+                        ? {} // R2 URLs are public, no auth needed
+                        : { Authorization: `Bearer ${getAuthToken()}` }; // Local URLs need auth
+                      
+                      const response = await fetch(attachmentUrl, { headers });
+                      
+                      if (!response.ok) {
+                        throw new Error(`Failed to fetch file: ${response.status}`);
+                      }
+                      
+                      const blob = await response.blob();
+                      const blobUrl = window.URL.createObjectURL(blob);
+                      
+                      // Create download link
+                      const link = document.createElement('a');
+                      link.href = blobUrl;
+                      link.download = fileName;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                      
+                      // Clean up blob URL
+                      window.URL.revokeObjectURL(blobUrl);
+                    } catch (error) {
+                      console.error('Download error:', error);
+                      // Fallback: open in new tab if download fails
+                      window.open(attachmentUrl, '_blank');
+                    }
                   }}
                   className="rounded-lg bg-[#2f4bff] px-4 py-2 text-sm font-semibold text-white hover:bg-[#2f4bff]/90 transition"
                 >
