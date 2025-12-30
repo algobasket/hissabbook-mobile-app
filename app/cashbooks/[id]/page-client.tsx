@@ -1331,47 +1331,47 @@ export default function BookDetailPageClient() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
-                  <h1 className="text-xl font-semibold text-[#1f2937]">{book.name}</h1>
+                  <h1 className="text-base sm:text-lg md:text-xl font-semibold text-[#1f2937] truncate">{book.name}</h1>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
                   <button
                     onClick={() => router.push(`/cashbooks/${bookId}/settings/members`)}
-                    className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+                    className="rounded-lg p-1.5 sm:p-2 text-slate-600 hover:bg-slate-100 flex-shrink-0"
                     title="Settings"
                   >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                   </button>
                   <button
                     onClick={() => router.push(`/cashbooks/${bookId}/settings/members`)}
-                    className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+                    className="rounded-lg p-1.5 sm:p-2 text-slate-600 hover:bg-slate-100 flex-shrink-0"
                     title="Members"
                   >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </button>
                   {/* Add Bulk Entries - Only show for managers/admins */}
                   {(getUserRole() === "managers" || getUserRole() === "manager" || isAdmin()) && (
-                    <button className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <button className="hidden sm:flex items-center gap-1.5 sm:gap-2 rounded-lg border border-slate-200 bg-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 flex-shrink-0">
+                      <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
-                      Add Bulk Entries
+                      <span className="hidden md:inline">Add Bulk Entries</span>
                     </button>
                   )}
                   <div className="relative">
                     <button 
                       onClick={() => setShowReportsDropdown(!showReportsDropdown)}
-                      className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                      className="flex items-center gap-1 sm:gap-2 rounded-lg border border-slate-200 bg-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 flex-shrink-0"
                     >
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
-                      Reports
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <span className="hidden sm:inline">Reports</span>
+                      <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
@@ -1409,14 +1409,14 @@ export default function BookDetailPageClient() {
           <div className="border-b border-slate-200 bg-white">
             <div className="w-full px-2 py-4 sm:px-3 lg:px-4">
               {/* Filter Dropdowns */}
-              <div className="mb-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+              <div className="mb-4 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:grid-cols-6">
                 {/* Duration Dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setOpenDropdown(openDropdown === "duration" ? null : "duration")}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Duration: {duration === "all" ? "All Time" : duration === "today" ? "Today" : duration === "yesterday" ? "Yesterday" : duration === "this_month" ? "This Month" : duration === "last_month" ? "Last Month" : "Custom"}
+                    <span className="hidden sm:inline">Duration: </span>{duration === "all" ? "All Time" : duration === "today" ? "Today" : duration === "yesterday" ? "Yesterday" : duration === "this_month" ? "This Month" : duration === "last_month" ? "Last Month" : "Custom"}
                   </button>
                   {openDropdown === "duration" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-lg border border-slate-200 bg-white shadow-lg">
@@ -1462,9 +1462,9 @@ export default function BookDetailPageClient() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenDropdown(openDropdown === "types" ? null : "types")}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Types: {types === "all" ? "All" : types === "cash_in" ? "Cash In" : "Cash Out"}
+                    <span className="hidden sm:inline">Types: </span>{types === "all" ? "All" : types === "cash_in" ? "Cash In" : "Cash Out"}
                   </button>
                   {openDropdown === "types" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-lg border border-slate-200 bg-white shadow-lg">
@@ -1516,9 +1516,9 @@ export default function BookDetailPageClient() {
                         setOpenDropdown(openDropdown === "parties" ? null : "parties");
                       }
                     }}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Parties: All
+                    <span className="hidden sm:inline">Parties: </span>All
                   </button>
                   {openDropdown === "parties-empty" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-lg border border-slate-200 bg-white p-4 shadow-lg">
@@ -1547,9 +1547,9 @@ export default function BookDetailPageClient() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenDropdown(openDropdown === "members" ? null : "members")}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Members: {members === "all" ? "All" : bookMembers.find(m => m.id === members)?.name || "All"}
+                    <span className="hidden sm:inline">Members: </span>{members === "all" ? "All" : bookMembers.find(m => m.id === members)?.name || "All"}
                   </button>
                   {openDropdown === "members" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-lg border border-slate-200 bg-white shadow-lg">
@@ -1613,9 +1613,9 @@ export default function BookDetailPageClient() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenDropdown(openDropdown === "paymentModes" ? null : "paymentModes")}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Payment Modes: {paymentModes.length === 0 ? "All" : `${paymentModes.length} selected`}
+                    <span className="hidden sm:inline">Payment Modes: </span>{paymentModes.length === 0 ? "All" : `${paymentModes.length} selected`}
                   </button>
                   {openDropdown === "paymentModes" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-lg border border-slate-200 bg-white shadow-lg">
@@ -1678,9 +1678,9 @@ export default function BookDetailPageClient() {
                         setOpenDropdown(openDropdown === "categories" ? null : "categories");
                       }
                     }}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 py-1.5 sm:py-2 text-left text-xs sm:text-sm text-slate-700 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20 truncate"
                   >
-                    Categories: All
+                    <span className="hidden sm:inline">Categories: </span>All
                   </button>
                   {openDropdown === "categories-empty" && (
                     <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-lg border border-slate-200 bg-white p-4 shadow-lg">
@@ -1707,18 +1707,18 @@ export default function BookDetailPageClient() {
               </div>
 
               {/* Search and Action Buttons */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex-1">
+              <div className="flex flex-col gap-2.5 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex-1 min-w-0">
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Search by remark or amount..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 pl-10 pr-4 text-sm text-slate-700 placeholder-slate-400 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-3 sm:px-4 py-2 pl-8 sm:pl-10 pr-3 sm:pr-4 text-xs sm:text-sm text-slate-700 placeholder-slate-400 focus:border-[#2f4bff] focus:outline-none focus:ring-2 focus:ring-[#2f4bff]/20"
                     />
                     <svg
-                      className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
+                      className="absolute left-2 sm:left-3 top-1/2 h-4 w-4 sm:h-5 sm:w-5 -translate-y-1/2 text-slate-400"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
@@ -1728,7 +1728,7 @@ export default function BookDetailPageClient() {
                     </svg>
                   </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3 flex-shrink-0">
                   {/* Show buttons only if user is manager/admin OR if staff and toggle is enabled */}
                   {(() => {
                     const userRole = getUserRole();
@@ -1747,24 +1747,26 @@ export default function BookDetailPageClient() {
                             setEntryType("cash_in");
                             setShowCashEntryModal(true);
                           }}
-                          className="flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition"
+                          className="flex items-center gap-1 sm:gap-2 rounded-lg bg-emerald-600 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition flex-shrink-0"
                         >
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
-                          Cash In
+                          <span className="hidden sm:inline">Cash In</span>
+                          <span className="sm:hidden">+</span>
                         </button>
                         <button
                           onClick={() => {
                             setEntryType("cash_out");
                             setShowCashEntryModal(true);
                           }}
-                          className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-700 transition"
+                          className="flex items-center gap-1 sm:gap-2 rounded-lg bg-red-600 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-red-700 transition flex-shrink-0"
                         >
-                          <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
                           </svg>
-                          Cash Out
+                          <span className="hidden sm:inline">Cash Out</span>
+                          <span className="sm:hidden">-</span>
                         </button>
                       </>
                     );
@@ -1776,18 +1778,18 @@ export default function BookDetailPageClient() {
 
           {/* Summary Cards */}
           <div className="w-full px-2 sm:px-3 lg:px-4">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
               {/* Cash In Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
-                    <svg className="h-6 w-6 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-emerald-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Cash In</p>
-                    <p className="text-2xl font-bold text-green-600">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Cash In</p>
+                    <p className="text-xl sm:text-2xl font-bold text-green-600 truncate">
                       {entries
                         .filter((e) => e.entry_type === "cash_in")
                         .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
@@ -1801,16 +1803,16 @@ export default function BookDetailPageClient() {
               </div>
 
               {/* Cash Out Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
-                    <svg className="h-6 w-6 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-red-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Cash Out</p>
-                    <p className="text-2xl font-bold text-red-600">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Cash Out</p>
+                    <p className="text-xl sm:text-2xl font-bold text-red-600 truncate">
                       {entries
                         .filter((e) => e.entry_type === "cash_out")
                         .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
@@ -1824,15 +1826,15 @@ export default function BookDetailPageClient() {
               </div>
 
               {/* Net Balance Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                    <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <div className="rounded-xl border border-slate-200 bg-white p-3 sm:p-4 shadow-sm">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-blue-100 flex-shrink-0">
+                    <svg className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-slate-600">Net Balance</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs sm:text-sm font-medium text-slate-600">Net Balance</p>
                     {(() => {
                       const netBalance = (
                         entries
@@ -1843,7 +1845,7 @@ export default function BookDetailPageClient() {
                           .reduce((sum, e) => sum + parseFloat(e.amount || 0), 0)
                       );
                       return (
-                        <p className={`text-2xl font-bold ${
+                        <p className={`text-xl sm:text-2xl font-bold truncate ${
                           netBalance >= 0 ? "text-green-600" : "text-red-600"
                         }`}>
                           {netBalance.toLocaleString("en-IN", {
@@ -1995,11 +1997,11 @@ export default function BookDetailPageClient() {
                     </div>
                   ) : null;
                 })()}
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-slate-200">
+                <div className="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0">
+                  <table className="w-full divide-y divide-slate-200" style={{ minWidth: '360px' }}>
                     <thead className="bg-slate-50">
                       <tr>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                        <th className="px-0.5 sm:px-1 md:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 w-5 sm:w-auto">
                           <input
                             type="checkbox"
                             checked={(() => {
@@ -2028,18 +2030,18 @@ export default function BookDetailPageClient() {
                               }
                             }}
                             onClick={(e) => e.stopPropagation()}
-                            className="h-4 w-4 rounded border-slate-300 text-[#2f4bff] focus:ring-2 focus:ring-[#2f4bff] focus:ring-offset-2"
+                            className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 rounded border-slate-300 text-[#2f4bff] focus:ring-2 focus:ring-[#2f4bff] focus:ring-offset-2"
                           />
                         </th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Date & Time</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Remarks</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Type</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Party</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Category</th>
-                        <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Payment Mode</th>
-                        <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Amount</th>
-                        <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-500">Balance</th>
-                        <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">Actions</th>
+                        <th className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 whitespace-nowrap min-w-[65px] max-w-[65px] sm:min-w-0 sm:max-w-none">Date & Time</th>
+                        <th className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 min-w-[70px] max-w-[70px] sm:min-w-0 sm:max-w-none">Remarks</th>
+                        <th className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 whitespace-nowrap w-8 sm:w-auto">Type</th>
+                        <th className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 hidden sm:table-cell">Party</th>
+                        <th className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 hidden md:table-cell">Category</th>
+                        <th className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-left text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 hidden lg:table-cell">Payment Mode</th>
+                        <th className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-right text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 whitespace-nowrap min-w-[55px] max-w-[55px] sm:min-w-0 sm:max-w-none">Amount</th>
+                        <th className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-right text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 hidden sm:table-cell whitespace-nowrap">Balance</th>
+                        <th className="px-0.5 sm:px-1 md:px-1.5 py-1 sm:py-1.5 md:py-2 lg:py-3 text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 whitespace-nowrap w-8 sm:w-auto">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 bg-white">
@@ -2101,7 +2103,7 @@ export default function BookDetailPageClient() {
                               });
                             }}
                           >
-                            <td className="whitespace-nowrap px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                            <td className="whitespace-nowrap px-0.5 sm:px-1 md:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 w-5" onClick={(e) => e.stopPropagation()}>
                               <input
                                 type="checkbox"
                                 checked={selectedEntries.has(entry.id)}
@@ -2115,59 +2117,60 @@ export default function BookDetailPageClient() {
                                   setSelectedEntries(newSelected);
                                 }}
                                 onClick={(e) => e.stopPropagation()}
-                                className="h-4 w-4 rounded border-slate-300 text-[#2f4bff] focus:ring-2 focus:ring-[#2f4bff] focus:ring-offset-2"
+                                className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 rounded border-slate-300 text-[#2f4bff] focus:ring-2 focus:ring-[#2f4bff] focus:ring-offset-2"
                               />
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3 text-sm text-slate-600">
-                              <div className="font-semibold text-slate-900">{formattedDate}</div>
-                              {formattedTime && <div className="text-xs text-slate-500">{formattedTime}</div>}
+                            <td className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-[10px] sm:text-xs md:text-sm text-slate-600 min-w-[65px] max-w-[65px] sm:min-w-0 sm:max-w-none">
+                              <div className="font-semibold text-slate-900 text-[10px] sm:text-xs leading-tight">{formattedDate}</div>
+                              {formattedTime && <div className="text-[10px] sm:text-xs text-slate-500 leading-tight">{formattedTime}</div>}
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">
-                              <div className="max-w-xs truncate" title={entry.remarks || ""}>
+                            <td className="px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-[10px] sm:text-xs md:text-sm text-slate-600 min-w-[70px] max-w-[70px] sm:min-w-0 sm:max-w-xs">
+                              <div className="truncate text-[10px] sm:text-xs leading-tight" title={entry.remarks || ""}>
                                 {entry.remarks || "-"}
                               </div>
                               {attributionValue && (
-                                <div className="text-xs text-slate-400">
+                                <div className="hidden sm:block text-xs text-slate-400">
                                   {attributionLabel} {attributionValue}
                                 </div>
                               )}
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3">
+                            <td className="whitespace-nowrap px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 w-8">
                               <span
-                                className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                                className={`inline-flex rounded-full px-1 sm:px-1.5 md:px-2 py-0.5 text-[10px] sm:text-xs font-semibold ${
                                   entry.entry_type === "cash_in"
                                     ? "bg-emerald-100 text-emerald-800"
                                     : "bg-red-100 text-red-800"
                                 }`}
                               >
-                                {entry.entry_type === "cash_in" ? "Cash In" : "Cash Out"}
+                                <span className="hidden sm:inline">{entry.entry_type === "cash_in" ? "Cash In" : "Cash Out"}</span>
+                                <span className="sm:hidden">{entry.entry_type === "cash_in" ? "In" : "Out"}</span>
                               </span>
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">
+                            <td className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-[10px] sm:text-xs md:text-sm text-slate-600 hidden sm:table-cell">
                               {entry.party_name && entry.party_name.startsWith("phone_") 
                                 ? "via phone" 
                                 : (entry.party_name || "-")}
                             </td>
-                            <td className="px-4 py-3 text-sm text-slate-600">{entry.category_name || "-"}</td>
-                            <td className="px-4 py-3 text-sm text-slate-600">{entry.payment_mode || "-"}</td>
+                            <td className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-[10px] sm:text-xs md:text-sm text-slate-600 hidden md:table-cell">{entry.category_name || "-"}</td>
+                            <td className="px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-[10px] sm:text-xs md:text-sm text-slate-600 hidden lg:table-cell">{entry.payment_mode || "-"}</td>
                             <td
-                              className={`whitespace-nowrap px-4 py-3 text-right text-sm font-semibold ${
+                              className={`whitespace-nowrap px-0.5 sm:px-1 md:px-1.5 lg:px-2 py-1 sm:py-1.5 md:py-2 lg:py-3 text-right text-[10px] sm:text-xs md:text-sm font-semibold min-w-[55px] max-w-[55px] sm:min-w-0 sm:max-w-none ${
                                 entry.entry_type === "cash_in" ? "text-emerald-600" : "text-red-600"
                               }`}
                             >
-                              {entry.entry_type === "cash_in" ? "+" : "-"}
-                              {parseFloat(entry.amount).toLocaleString("en-IN", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}
+                              <span className="text-[10px] sm:text-xs">{entry.entry_type === "cash_in" ? "+" : "-"}</span>
+                              <span className="text-[10px] sm:text-xs md:text-sm">{parseFloat(entry.amount).toLocaleString("en-IN", {
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0,
+                              })}</span>
                             </td>
-                            <td className={`whitespace-nowrap px-4 py-3 text-right text-sm font-semibold ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                            <td className={`whitespace-nowrap px-1 sm:px-1.5 md:px-2 lg:px-3 py-1 sm:py-1.5 md:py-2 lg:py-3 text-right text-[10px] sm:text-xs md:text-sm font-semibold hidden sm:table-cell ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>
                               {(entry.balance || 0).toLocaleString("en-IN", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               })}
                             </td>
-                            <td className="whitespace-nowrap px-4 py-3 text-center" onClick={(e) => e.stopPropagation()}>
+                            <td className="whitespace-nowrap px-0.5 sm:px-1 md:px-1.5 py-1 sm:py-1.5 md:py-2 lg:py-3 text-center w-8 sm:w-auto" onClick={(e) => e.stopPropagation()}>
                               {userPermissions.includes("cashbooks.delete") && (
                                 <button
                                   onClick={async (e) => {
@@ -2205,13 +2208,13 @@ export default function BookDetailPageClient() {
                                       alert(err instanceof Error ? err.message : "Failed to delete entry");
                                     }
                                   }}
-                                  className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100 transition"
+                                  className="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 p-1 sm:px-1.5 md:px-2 py-1 sm:py-1.5 text-[10px] sm:text-xs font-semibold text-red-700 hover:bg-red-100 transition min-w-[24px] sm:min-w-0"
                                   title="Delete entry"
                                 >
-                                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                  <svg className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                   </svg>
-                                  Delete
+                                  <span className="hidden md:inline ml-1">Delete</span>
                                 </button>
                               )}
                             </td>
@@ -4367,27 +4370,27 @@ export default function BookDetailPageClient() {
 
         {/* Export Transactions Modal */}
         {showExportModal && (
-          <div className="fixed inset-0 z-[65] flex items-center justify-center bg-black/50 p-4">
-            <div className="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+          <div className="fixed inset-0 z-[65] flex items-center justify-center bg-black/50 p-2 sm:p-4">
+            <div className="w-full max-w-6xl bg-white rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[95vh] sm:h-[90vh]">
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-white">
-                <h2 className="text-lg font-semibold text-[#1f2937]">Export Transactions</h2>
+              <div className="flex items-center justify-between border-b border-slate-200 px-3 sm:px-4 md:px-6 py-3 sm:py-4 bg-white flex-shrink-0">
+                <h2 className="text-base sm:text-lg font-semibold text-[#1f2937] truncate pr-2">Export Transactions</h2>
                 <button
                   onClick={() => {
                     setShowExportModal(false);
                     setReportData(null);
                   }}
-                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                  className="rounded-lg p-1 sm:p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 flex-shrink-0"
                 >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
               {/* Filter Tabs */}
-              <div className="border-b border-slate-200 px-6 bg-white">
-                <div className="flex gap-1 -mb-px">
+              <div className="border-b border-slate-200 px-2 sm:px-4 md:px-6 bg-white flex-shrink-0 overflow-x-auto">
+                <div className="flex gap-1 -mb-px min-w-max">
                   {[
                     { id: "all", label: "All Entries" },
                     { id: "day", label: "Day-wise" },
@@ -4398,7 +4401,7 @@ export default function BookDetailPageClient() {
                     <button
                       key={tab.id}
                       onClick={() => setExportFilterType(tab.id as any)}
-                      className={`px-4 py-3 text-sm font-medium border-b-2 transition ${
+                      className={`px-2 sm:px-3 md:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium border-b-2 transition whitespace-nowrap ${
                         exportFilterType === tab.id
                           ? "border-[#2f4bff] text-[#2f4bff]"
                           : "border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300"
@@ -4411,36 +4414,36 @@ export default function BookDetailPageClient() {
               </div>
 
               {/* Preview Section */}
-              <div className="flex-1 overflow-y-auto p-6 bg-slate-50">
-                <div className="bg-white rounded-lg shadow-sm p-6 min-h-full">
+              <div className="flex-1 overflow-y-auto p-1.5 sm:p-2 md:p-4 lg:p-6 bg-slate-50">
+                <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 md:p-4 lg:p-6 min-h-full">
                   {generatingReport ? (
-                    <div className="flex items-center justify-center py-12">
+                    <div className="flex items-center justify-center py-6 sm:py-8 md:py-12">
                       <div className="text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#2f4bff] mb-4"></div>
-                        <p className="text-sm text-slate-600">Generating report preview...</p>
+                        <div className="inline-block animate-spin rounded-full h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 border-b-2 border-[#2f4bff] mb-2 sm:mb-3 md:mb-4"></div>
+                        <p className="text-xs sm:text-sm text-slate-600">Generating report preview...</p>
                       </div>
                     </div>
                   ) : reportData ? (
-                    <div className="space-y-6">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6">
                       {/* Report Header */}
-                      <div className="text-center border-b border-slate-200 pb-4">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                          <div className="w-10 h-10 rounded-lg bg-[#2f4bff] flex items-center justify-center">
-                            <span className="text-white font-bold text-lg">C</span>
+                      <div className="text-center border-b border-slate-200 pb-2 sm:pb-3 md:pb-4">
+                        <div className="flex items-center justify-center gap-1 sm:gap-1.5 md:gap-2 mb-1 sm:mb-2">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg bg-[#2f4bff] flex items-center justify-center">
+                            <span className="text-white font-bold text-xs sm:text-sm md:text-lg">C</span>
                           </div>
-                          <h1 className="text-2xl font-bold text-[#1f2937]">HissabBook Report</h1>
+                          <h1 className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold text-[#1f2937]">HissabBook Report</h1>
                         </div>
-                        <p className="text-sm text-slate-600 mt-2">
+                        <p className="text-[10px] sm:text-xs md:text-sm text-slate-600 mt-0.5 sm:mt-1 md:mt-2 px-1 sm:px-2 leading-tight">
                           Generated On - {new Date().toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}. Generated by - {reportData.generatedBy || "User"}
                         </p>
                       </div>
 
                       {/* Book Title */}
                       <div className="text-center">
-                        <h2 className="text-xl font-semibold text-[#1f2937]">
+                        <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-[#1f2937] px-1 sm:px-2">
                           {book?.name || "Cashbook"}
                           {exportFilterType !== "all" && (
-                            <span className="text-base font-normal text-slate-600">
+                            <span className="text-[10px] sm:text-xs md:text-sm lg:text-base font-normal text-slate-600">
                               {" "}({exportFilterType === "day" ? "Day-wise" : exportFilterType === "party" ? "Party-wise" : exportFilterType === "category" ? "Category-wise" : "Payment Mode-wise"} Summary)
                             </span>
                           )}
@@ -4448,76 +4451,76 @@ export default function BookDetailPageClient() {
                       </div>
 
                       {/* Summary */}
-                      <div className="grid grid-cols-3 gap-4 p-4 bg-slate-50 rounded-lg">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 p-1.5 sm:p-2 md:p-3 lg:p-4 bg-slate-50 rounded-lg">
                         <div>
-                          <p className="text-sm text-slate-600">Total Cash In</p>
-                          <p className="text-lg font-semibold text-green-600">{reportData.summary?.totalCashIn || 0}</p>
+                          <p className="text-[10px] sm:text-xs md:text-sm text-slate-600">Total Cash In</p>
+                          <p className="text-sm sm:text-base md:text-lg font-semibold text-green-600">{reportData.summary?.totalCashIn || 0}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-slate-600">Total Cash Out</p>
-                          <p className="text-lg font-semibold text-red-600">{reportData.summary?.totalCashOut || 0}</p>
+                          <p className="text-[10px] sm:text-xs md:text-sm text-slate-600">Total Cash Out</p>
+                          <p className="text-sm sm:text-base md:text-lg font-semibold text-red-600">{reportData.summary?.totalCashOut || 0}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-slate-600">{exportFilterType !== "all" ? "Net Balance" : "Final Balance"}</p>
-                          <p className={`text-lg font-semibold ${
+                          <p className="text-[10px] sm:text-xs md:text-sm text-slate-600">{exportFilterType !== "all" ? "Net Balance" : "Final Balance"}</p>
+                          <p className={`text-sm sm:text-base md:text-lg font-semibold ${
                             parseFloat(reportData.summary?.finalBalance || 0) >= 0 ? "text-green-600" : "text-red-600"
                           }`}>{reportData.summary?.finalBalance || 0}</p>
                         </div>
                       </div>
 
                       {/* Entry Count */}
-                      <div className="text-sm text-slate-600">
+                      <div className="text-[10px] sm:text-xs md:text-sm text-slate-600">
                         Total No. of entries: {reportData.totalEntries || 0}
                       </div>
 
                       {/* Transactions Table */}
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                      <div className="overflow-x-auto -mx-1.5 sm:mx-0 px-1.5 sm:px-0">
+                        <table className="w-full text-[10px] sm:text-xs md:text-sm" style={{ minWidth: exportFilterType === "all" ? "500px" : "350px" }}>
                           <thead>
                             <tr className="border-b border-slate-200">
                               {exportFilterType === "day" && (
                                 <>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Date</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash In</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash Out</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Balance</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Date</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash In</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash Out</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Balance</th>
                                 </>
                               )}
                               {exportFilterType === "party" && (
                                 <>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Party</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash In</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash Out</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Balance</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Party</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash In</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash Out</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Balance</th>
                                 </>
                               )}
                               {exportFilterType === "category" && (
                                 <>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Category</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash In</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash Out</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Balance</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Category</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash In</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash Out</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Balance</th>
                                 </>
                               )}
                               {exportFilterType === "payment_mode" && (
                                 <>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Mode</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash In</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash Out</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Balance</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Mode</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash In</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash Out</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Balance</th>
                                 </>
                               )}
                               {exportFilterType === "all" && (
                                 <>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Date</th>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Remark</th>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Party</th>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Category</th>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Mode</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash In</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Cash Out</th>
-                                  <th className="text-left py-2 px-3 font-semibold text-slate-700">Entry By</th>
-                                  <th className="text-right py-2 px-3 font-semibold text-slate-700">Balance</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs min-w-[70px]">Date</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs min-w-[60px]">Remark</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs hidden sm:table-cell">Party</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs hidden md:table-cell">Category</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs hidden lg:table-cell">Mode</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Cash In</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs hidden sm:table-cell">Cash Out</th>
+                                  <th className="text-left py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs hidden md:table-cell">Entry By</th>
+                                  <th className="text-right py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 font-semibold text-slate-700 text-[10px] sm:text-xs">Balance</th>
                                 </>
                               )}
                             </tr>
@@ -4531,9 +4534,9 @@ export default function BookDetailPageClient() {
                                     <tr key={index} className="border-b border-slate-100">
                                       {exportFilterType === "day" && (
                                         <>
-                                          <td className="py-2 px-3 text-slate-700">
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-slate-700 text-[10px] sm:text-xs">
                                             <div>
-                                              {new Date(entry.entry_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                                              <div className="leading-tight">{new Date(entry.entry_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
                                               {entry.entry_time && (() => {
                                                 const timeStr = entry.entry_time.substring(0, 5); // Get HH:MM
                                                 const [hours, minutes] = timeStr.split(':');
@@ -4541,41 +4544,41 @@ export default function BookDetailPageClient() {
                                                 const hour12 = hour24 === 0 ? 12 : hour24 > 12 ? hour24 - 12 : hour24;
                                                 const ampm = hour24 >= 12 ? 'PM' : 'AM';
                                                 const formattedTime = `${hour12.toString().padStart(2, '0')}:${minutes} ${ampm}`;
-                                                return <div className="text-xs text-slate-500">{formattedTime}</div>;
+                                                return <div className="text-[10px] text-slate-500 leading-tight">{formattedTime}</div>;
                                               })()}
                                             </div>
                                           </td>
-                                          <td className="py-2 px-3 text-right text-green-600">{entry.cash_in || 0}</td>
-                                          <td className="py-2 px-3 text-right text-red-600">{entry.cash_out || 0}</td>
-                                          <td className={`py-2 px-3 text-right ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-green-600 text-[10px] sm:text-xs">{entry.cash_in || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-red-600 text-[10px] sm:text-xs">{entry.cash_out || 0}</td>
+                                          <td className={`py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-[10px] sm:text-xs ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
                                         </>
                                       )}
                                       {exportFilterType === "party" && (
                                         <>
-                                          <td className="py-2 px-3 text-slate-700">
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-slate-700 text-[10px] sm:text-xs">
                                             {entry.party_name && entry.party_name.startsWith("phone_") 
                                               ? "via phone" 
                                               : (entry.party_name || "-")}
                                           </td>
-                                          <td className="py-2 px-3 text-right text-green-600">{entry.cash_in || 0}</td>
-                                          <td className="py-2 px-3 text-right text-red-600">{entry.cash_out || 0}</td>
-                                          <td className={`py-2 px-3 text-right ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-green-600 text-[10px] sm:text-xs">{entry.cash_in || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-red-600 text-[10px] sm:text-xs">{entry.cash_out || 0}</td>
+                                          <td className={`py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-[10px] sm:text-xs ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
                                         </>
                                       )}
                                       {exportFilterType === "category" && (
                                         <>
-                                          <td className="py-2 px-3 text-slate-700">{entry.category_name || "-"}</td>
-                                          <td className="py-2 px-3 text-right text-green-600">{entry.cash_in || 0}</td>
-                                          <td className="py-2 px-3 text-right text-red-600">{entry.cash_out || 0}</td>
-                                          <td className={`py-2 px-3 text-right ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-slate-700 text-[10px] sm:text-xs">{entry.category_name || "-"}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-green-600 text-[10px] sm:text-xs">{entry.cash_in || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-red-600 text-[10px] sm:text-xs">{entry.cash_out || 0}</td>
+                                          <td className={`py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-[10px] sm:text-xs ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
                                         </>
                                       )}
                                       {exportFilterType === "payment_mode" && (
                                         <>
-                                          <td className="py-2 px-3 text-slate-700">{entry.payment_mode || "-"}</td>
-                                          <td className="py-2 px-3 text-right text-green-600">{entry.cash_in || 0}</td>
-                                          <td className="py-2 px-3 text-right text-red-600">{entry.cash_out || 0}</td>
-                                          <td className={`py-2 px-3 text-right ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-slate-700 text-[10px] sm:text-xs">{entry.payment_mode || "-"}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-green-600 text-[10px] sm:text-xs">{entry.cash_in || 0}</td>
+                                          <td className="py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-red-600 text-[10px] sm:text-xs">{entry.cash_out || 0}</td>
+                                          <td className={`py-1 sm:py-1.5 md:py-2 px-1.5 sm:px-2 md:px-3 text-right text-[10px] sm:text-xs ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
                                         </>
                                       )}
                                     </tr>
@@ -4584,9 +4587,9 @@ export default function BookDetailPageClient() {
                                   // Regular entry row
                                   return (
                                     <tr key={entry.id || index} className="border-b border-slate-100">
-                                      <td className="py-2 px-3 text-slate-700">
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 min-w-[70px]">
                                         <div>
-                                          {new Date(entry.entry_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                                          <div className="text-[10px] sm:text-xs leading-tight">{new Date(entry.entry_date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
                                           {entry.entry_time && (() => {
                                             const timeStr = entry.entry_time.substring(0, 5); // Get HH:MM
                                             const [hours, minutes] = timeStr.split(':');
@@ -4594,48 +4597,50 @@ export default function BookDetailPageClient() {
                                             const hour12 = hour24 === 0 ? 12 : hour24 > 12 ? hour24 - 12 : hour24;
                                             const ampm = hour24 >= 12 ? 'PM' : 'AM';
                                             const formattedTime = `${hour12.toString().padStart(2, '0')}:${minutes} ${ampm}`;
-                                            return <div className="text-xs text-slate-500">{formattedTime}</div>;
+                                            return <div className="text-[10px] text-slate-500 leading-tight">{formattedTime}</div>;
                                           })()}
                                         </div>
                                       </td>
-                                      <td className="py-2 px-3 text-slate-700">
-                                        <div className="flex items-center gap-1">
-                                          {(() => {
-                                            const remarks = entry.remarks || "-";
-                                            if (remarks === "-" || remarks.length <= 10) {
-                                              return remarks;
-                                            }
-                                            return remarks.substring(0, 10) + "...";
-                                          })()}
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 min-w-[60px]">
+                                        <div className="flex items-center gap-0.5 sm:gap-1">
+                                          <span className="text-[10px] sm:text-xs truncate leading-tight">
+                                            {(() => {
+                                              const remarks = entry.remarks || "-";
+                                              if (remarks === "-" || remarks.length <= 8) {
+                                                return remarks;
+                                              }
+                                              return remarks.substring(0, 8) + "...";
+                                            })()}
+                                          </span>
                                           {entry.hasAttachment && (
-                                            <svg className="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                            <svg className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-4 md:w-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                               <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
                                           )}
                                         </div>
                                       </td>
-                                      <td className="py-2 px-3 text-slate-700">
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 text-[10px] sm:text-xs hidden sm:table-cell">
                                         {entry.party_name && entry.party_name.startsWith("phone_") 
                                           ? "via phone" 
                                           : (entry.party_name || "-")}
                                       </td>
-                                      <td className="py-2 px-3 text-slate-700">{entry.category_name || "-"}</td>
-                                      <td className="py-2 px-3 text-slate-700">{entry.payment_mode || "-"}</td>
-                                      <td className="py-2 px-3 text-right text-green-600">
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 text-[10px] sm:text-xs hidden md:table-cell">{entry.category_name || "-"}</td>
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 text-[10px] sm:text-xs hidden lg:table-cell">{entry.payment_mode || "-"}</td>
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-right text-green-600 text-[10px] sm:text-xs">
                                         {entry.entry_type === "cash_in" ? entry.amount : ""}
                                       </td>
-                                      <td className="py-2 px-3 text-right text-red-600">
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-right text-red-600 text-[10px] sm:text-xs hidden sm:table-cell">
                                         {entry.entry_type === "cash_out" ? entry.amount : ""}
                                       </td>
-                                      <td className="py-2 px-3 text-slate-700">{entry.created_by_name || "-"}</td>
-                                      <td className={`py-2 px-3 text-right ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
+                                      <td className="py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-slate-700 text-[10px] sm:text-xs hidden md:table-cell">{entry.created_by_name || "-"}</td>
+                                      <td className={`py-1 sm:py-1.5 md:py-2 px-1 sm:px-1.5 md:px-2 lg:px-3 text-right text-[10px] sm:text-xs ${(entry.balance || 0) < 0 ? 'text-red-600' : 'text-green-600'}`}>{entry.balance || 0}</td>
                                     </tr>
                                   );
                                 }
                               })
                             ) : (
                               <tr>
-                                <td colSpan={exportFilterType === "all" ? 9 : 4} className="py-8 text-center text-slate-500">
+                                <td colSpan={exportFilterType === "all" ? 9 : 4} className="py-6 sm:py-8 text-center text-xs sm:text-sm text-slate-500">
                                   No entries found
                                 </td>
                               </tr>
@@ -4645,7 +4650,7 @@ export default function BookDetailPageClient() {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-12 text-slate-500">
+                    <div className="text-center py-8 sm:py-12 text-xs sm:text-sm text-slate-500">
                       Select a filter type to generate report preview
                     </div>
                   )}
@@ -4653,36 +4658,38 @@ export default function BookDetailPageClient() {
               </div>
 
               {/* Footer Actions */}
-              <div className="flex items-center justify-between border-t border-slate-200 px-6 py-4 bg-white">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3 border-t border-slate-200 px-3 sm:px-4 md:px-6 py-3 sm:py-4 bg-white flex-shrink-0">
                 <button
                   onClick={() => setShowPdfSettings(true)}
-                  className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-slate-200 bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50"
                 >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  PDF Settings
+                  <span className="hidden sm:inline">PDF Settings</span>
+                  <span className="sm:hidden">Settings</span>
                 </button>
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <button
                     onClick={() => {
                       setShowExportModal(false);
                       setReportData(null);
                     }}
-                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition"
+                    className="flex-1 sm:flex-none rounded-lg border border-slate-200 bg-white px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50 transition"
                   >
                     Close
                   </button>
                   <button
                     onClick={() => downloadReport("pdf")}
                     disabled={generatingReport || !reportData}
-                    className="flex items-center gap-2 rounded-lg bg-[#2f4bff] px-4 py-2 text-sm font-semibold text-white hover:bg-[#2f4bff]/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center justify-center gap-1.5 sm:gap-2 flex-1 sm:flex-none rounded-lg bg-[#2f4bff] px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white hover:bg-[#2f4bff]/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
-                    Download as PDF
+                    <span className="hidden sm:inline">Download as PDF</span>
+                    <span className="sm:hidden">Download</span>
                   </button>
                 </div>
               </div>

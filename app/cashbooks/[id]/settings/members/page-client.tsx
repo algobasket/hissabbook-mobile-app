@@ -676,19 +676,19 @@ export default function MembersPageClient() {
   return (
     <ProtectedRoute>
       <AppShell activePath="/cashbooks">
-        <div className="mx-auto max-w-4xl space-y-6 px-6 py-10">
+        <div className="mx-auto max-w-4xl space-y-3 sm:space-y-4 md:space-y-6 px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4 md:py-6 lg:py-10">
           {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-2 sm:gap-3">
             <button
               onClick={() => router.push("/cashbooks")}
-              className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-[#2f4bff] transition"
+              className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-slate-600 hover:text-[#2f4bff] transition self-start"
             >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
-              Settings ({book?.name || "Book"})
+              <span className="truncate">Settings ({book?.name || "Book"})</span>
             </button>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               {/* Action buttons - Show based on permissions */}
               {(hasPermissionCheck("cashbooks.update") || hasPermissionCheck("cashbooks.delete") || hasPermissionCheck("cashbooks.create")) && (
                 <>
@@ -700,7 +700,7 @@ export default function MembersPageClient() {
                           setRenameModalOpen(true);
                         }
                       }}
-                      className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                      className="flex-1 min-w-[100px] sm:flex-none sm:min-w-0 rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50"
                     >
                       Rename Book
                     </button>
@@ -713,7 +713,7 @@ export default function MembersPageClient() {
                           setDuplicateModalOpen(true);
                         }
                       }}
-                      className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                      className="flex-1 min-w-[100px] sm:flex-none sm:min-w-0 rounded-lg border border-slate-200 bg-white px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-slate-700 hover:bg-slate-50"
                     >
                       Duplicate Book
                     </button>
@@ -725,7 +725,7 @@ export default function MembersPageClient() {
                           handleDeleteBook();
                         }
                       }}
-                      className="rounded-lg border border-red-200 bg-white px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                      className="flex-1 min-w-[100px] sm:flex-none sm:min-w-0 rounded-lg border border-red-200 bg-white px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-red-600 hover:bg-red-50"
                     >
                       Delete Book
                     </button>
@@ -736,27 +736,23 @@ export default function MembersPageClient() {
           </div>
 
           {error && (
-            <div className="rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-600">{error}</div>
+            <div className="rounded-xl bg-rose-50 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium text-rose-600">{error}</div>
           )}
 
           {/* Cash In/Cash Out Toggle Section - Only for Managers */}
           {isManagerOrAdmin() && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold text-[#1f2937]">Staff Permissions</h2>
-                <p className="mt-1 text-sm text-slate-500">Control whether staff members can create Cash In and Cash Out entries.</p>
+            <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-3 sm:p-4 md:p-6">
+              <div className="mb-3 sm:mb-4">
+                <h2 className="text-sm sm:text-base md:text-lg font-semibold text-[#1f2937]">Staff Permissions</h2>
+                <p className="mt-1 text-xs sm:text-sm text-slate-500">Control whether staff members can create Cash In and Cash Out entries.</p>
               </div>
               
-              <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <div className="flex-1">
-                  <h3 className="text-base font-medium text-[#1f2937]">Allow Staff to Create Cash In/Cash Out</h3>
-                  <p className="mt-1 text-sm text-slate-600">
-                    {book?.staffCashinCashoutEnabled 
-                      ? "Staff members can create Cash In and Cash Out entries in this cashbook."
-                      : "Staff members cannot create Cash In and Cash Out entries. Only managers can create entries."}
-                  </p>
-                </div>
-                <label className="relative inline-flex cursor-pointer items-center">
+              <div className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 sm:p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xs sm:text-sm md:text-base font-medium text-[#1f2937]">Allow Staff to Create Cash In/Cash Out</h3>
+                  </div>
+                  <label className="relative inline-flex cursor-pointer items-center flex-shrink-0">
                   <input
                     type="checkbox"
                     checked={book?.staffCashinCashoutEnabled || false}
@@ -798,31 +794,37 @@ export default function MembersPageClient() {
                     }}
                     className="peer sr-only"
                   />
-                  <div className="peer h-6 w-11 rounded-full bg-slate-300 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-slate-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#2f4bff] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#2f4bff]/20"></div>
-                </label>
+                    <div className="peer h-6 w-11 rounded-full bg-slate-300 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-slate-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#2f4bff] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#2f4bff]/20"></div>
+                  </label>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600">
+                  {book?.staffCashinCashoutEnabled 
+                    ? "Staff members can create Cash In and Cash Out entries in this cashbook."
+                    : "Staff members cannot create Cash In and Cash Out entries. Only managers can create entries."}
+                </p>
               </div>
             </div>
           )}
 
           {/* Members Section */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6">
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold text-[#1f2937]">Members</h2>
-              <p className="mt-1 text-sm text-slate-500">Add, Change role, Remove.</p>
+          <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-3 sm:p-4 md:p-6">
+            <div className="mb-3 sm:mb-4 md:mb-6">
+              <h2 className="text-sm sm:text-base md:text-lg font-semibold text-[#1f2937]">Members</h2>
+              <p className="mt-1 text-xs sm:text-sm text-slate-500">Add, Change role, Remove.</p>
             </div>
 
             {/* Add Members Section - Show based on permissions */}
             {hasPermissionCheck("cashbooks.update") && (
-              <div className="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="mb-2 text-base font-semibold text-[#1f2937]">Add Members</h3>
-                <p className="mb-4 text-sm text-slate-600">
+              <div className="mb-3 sm:mb-4 md:mb-6 rounded-xl border border-slate-200 bg-slate-50 p-3 sm:p-4 md:p-6">
+                <h3 className="mb-2 text-xs sm:text-sm md:text-base font-semibold text-[#1f2937]">Add Members</h3>
+                <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-slate-600">
                   Manage your cashflow together with your business partners, family or friends by adding them as members.
                 </p>
                 <button
                   onClick={handleAddMemberClick}
-                  className="flex items-center gap-2 rounded-xl bg-[#2f4bff] px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#2f4bff]/90 transition"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-[#2f4bff] px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-[#2f4bff]/90 transition w-full sm:w-auto"
                 >
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                   </svg>
                   Add member
@@ -831,11 +833,11 @@ export default function MembersPageClient() {
             )}
 
             {/* Total Members */}
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-base font-semibold text-[#1f2937]">Total Members ({members.length})</h3>
+            <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+              <h3 className="text-xs sm:text-sm md:text-base font-semibold text-[#1f2937]">Total Members ({members.length})</h3>
               <button 
                 onClick={handleViewRolesClick}
-                className="text-sm font-medium text-[#2f4bff] hover:underline"
+                className="text-xs sm:text-sm font-medium text-[#2f4bff] hover:underline self-start sm:self-center whitespace-nowrap"
               >
                 View roles & permissions &gt;
               </button>
@@ -847,54 +849,54 @@ export default function MembersPageClient() {
                 <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-[#2f4bff]"></div>
               </div>
             ) : members.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-                <p className="text-sm text-slate-500">No members added yet. Click "Add member" to get started.</p>
+              <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 sm:p-8 text-center">
+                <p className="text-xs sm:text-sm text-slate-500">No members added yet. Click "Add member" to get started.</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {members.map((member) => {
                   const role = getMemberRole(member);
                   const isCurrentUser = member.id === currentUser?.id;
                   return (
                     <div
                       key={member.id}
-                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 hover:shadow-sm transition"
+                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-2.5 sm:p-3 md:p-4 hover:shadow-sm transition gap-2"
                     >
-                      <div className="flex items-center gap-4 flex-1">
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                         <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-full text-white font-semibold ${getAvatarColor(
+                          className={`flex h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-full text-white font-semibold text-xs sm:text-sm md:text-base flex-shrink-0 ${getAvatarColor(
                             member.name || member.email
                           )}`}
                         >
                           {(member.name || member.email || "?").charAt(0).toUpperCase()}
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <p className="text-base font-semibold text-[#1f2937]">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col gap-0.5 sm:gap-1">
+                            <p className="text-xs sm:text-sm md:text-base font-semibold text-[#1f2937] truncate">
                               {isCurrentUser ? "You" : member.name || member.email}
                             </p>
                             {member.phone && (
-                              <span className="text-sm text-slate-500">{member.phone}</span>
+                              <span className="text-[10px] sm:text-xs text-slate-500 truncate">{member.phone}</span>
+                            )}
+                            {member.email && (
+                              <p className="text-[10px] sm:text-xs text-slate-500 truncate">{member.email}</p>
                             )}
                           </div>
-                          {member.email && (
-                            <p className="mt-1 text-sm text-slate-500">{member.email}</p>
-                          )}
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                         <span
-                          className={`rounded-lg border px-3 py-1 text-xs font-semibold ${getRoleColor(role)}`}
+                          className={`rounded-lg border px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold whitespace-nowrap ${getRoleColor(role)}`}
                         >
                           {role}
                         </span>
                         {!isCurrentUser && !member.isOwner && member.id !== book?.ownerId && hasPermissionCheck("cashbooks.update") && (
                           <button
                             onClick={() => handleRemoveMemberClick(member)}
-                            className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-red-600 transition"
+                            className="rounded-lg p-1 sm:p-1.5 md:p-2 text-slate-400 hover:bg-slate-100 hover:text-red-600 transition flex-shrink-0"
                             title="Remove member"
                           >
-                            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
@@ -909,32 +911,32 @@ export default function MembersPageClient() {
 
           {/* Entry Field Section - Show based on permissions */}
           {(hasPermissionCheck("cashbooks.update") || hasPermissionCheck("cashbooks.create")) && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h2 className="mb-1 text-lg font-semibold text-[#1f2937]">
+            <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+              <h2 className="mb-1 text-base sm:text-lg font-semibold text-[#1f2937]">
                 Entry Field <span className="text-rose-500">*</span>
               </h2>
-              <p className="text-sm text-slate-500">Party, Category, Payment mode & Custom Fields.</p>
+              <p className="text-xs sm:text-sm text-slate-500">Party, Category, Payment mode & Custom Fields.</p>
             </div>
           )}
 
           {/* Edit Data Operator Role Section - Show based on permissions */}
           {(hasPermissionCheck("cashbooks.update") || hasPermissionCheck("cashbooks.create")) && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-6">
-              <h2 className="mb-1 text-lg font-semibold text-[#1f2937]">Edit Data Operator Role</h2>
-              <p className="text-sm text-slate-500">Make changes in role as per your need.</p>
+            <div className="rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+              <h2 className="mb-1 text-base sm:text-lg font-semibold text-[#1f2937]">Edit Data Operator Role</h2>
+              <p className="text-xs sm:text-sm text-slate-500">Make changes in role as per your need.</p>
             </div>
           )}
         </div>
 
         {/* Add Member Modal */}
         {showAddMemberModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="w-full max-w-lg rounded-2xl bg-white shadow-xl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4">
+            <div className="w-full max-w-lg rounded-xl sm:rounded-2xl bg-white shadow-xl max-h-[90vh] overflow-y-auto">
               {inviteStep === "select" ? (
                 <>
                   {/* Step 1: Select Method */}
-                  <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
-                    <h2 className="text-lg font-semibold text-[#1f2937]">Add Member to {book?.name}</h2>
+                  <div className="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3 sm:py-4">
+                    <h2 className="text-base sm:text-lg font-semibold text-[#1f2937] truncate pr-2">Add Member to {book?.name}</h2>
                     <button
                       onClick={() => {
                         setShowAddMemberModal(false);
@@ -953,7 +955,7 @@ export default function MembersPageClient() {
                       </svg>
                     </button>
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     {loadingUsers ? (
                       <div className="flex items-center justify-center py-8">
                         <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-[#2f4bff]"></div>
@@ -962,7 +964,7 @@ export default function MembersPageClient() {
                       <>
                         {/* Mobile Number Input */}
                         <div className="mb-4">
-                          <label className="mb-2 block text-sm font-medium text-slate-700">
+                          <label className="mb-2 block text-xs sm:text-sm font-medium text-slate-700">
                             Mobile number
                           </label>
                           <div className="flex gap-2">
@@ -1119,16 +1121,16 @@ export default function MembersPageClient() {
               ) : (
                 <>
                   {/* Step 2: Choose Role & Confirm */}
-                  <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+                  <div className="flex items-center justify-between border-b border-slate-200 px-4 sm:px-6 py-3 sm:py-4">
                     <button
                       onClick={() => setInviteStep("select")}
                       className="text-slate-400 hover:text-slate-600"
                     >
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                       </svg>
                     </button>
-                    <h2 className="text-lg font-semibold text-[#1f2937]">Choose Role</h2>
+                    <h2 className="text-base sm:text-lg font-semibold text-[#1f2937]">Choose Role</h2>
                     <button
                       onClick={() => {
                         setShowAddMemberModal(false);
@@ -1147,10 +1149,10 @@ export default function MembersPageClient() {
                       </svg>
                     </button>
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     {/* Role Selection */}
-                    <div className="mb-6">
-                      <label className="mb-3 block text-sm font-medium text-slate-700">
+                    <div className="mb-4 sm:mb-6">
+                      <label className="mb-3 block text-xs sm:text-sm font-medium text-slate-700">
                         Select Role
                       </label>
                       <div className="grid grid-cols-2 gap-3">
@@ -1588,6 +1590,8 @@ function formatPermissionName(permission: string): string {
   // Return as-is if already readable
   return permission;
 }
+
+
 
 
 
